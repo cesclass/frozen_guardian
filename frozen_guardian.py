@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 #coding: UTF-8
-#
+
 #-------------------------------------------------------------------
 #
 #                         FROZEN GUARDIAN
@@ -13,7 +13,7 @@
 #   Pour fonctionner correctement, ce programme est dependant d'un
 #   autre, 'hub-ctrl', dont les sources sont disponnibles ici :
 #   https://github.com/codazoda/hub-ctrl.c
-#   Une fois compiler, il faut mettre le programme dans le dossier
+#   Une fois compile, il faut mettre le programme dans le dossier
 #   'frozen' de l'utilisateur qui lancera ce programme '~/frozen'
 #
 #   Le programme n'a pas de fonction d'arret. 
@@ -34,40 +34,38 @@
 #
 #-------------------------------------------------------------------
 #   Dev.    : Cyril ESCLASSAN 
-#   Contact : @cynex294 sur Twitter
-#   Sources : github.com/cesclass/...
-#   Update  : 04.11.2016
-#   Licence : GPL v3
+#   Contact : @cynex294 on Twitter
+#   Sources : github.com/cesclass/
+#   Update  : 19.05.11
+#   Licence : MIT
 #-------------------------------------------------------------------
 
-from sense_hat import SenseHat;
-from time import sleep;
-from os import system;
-
-#-------------------------------------------------------------------
-
-SENSE = SenseHat();
-TEMPERATURE = 25; # 25°C / Temperature de declenchement
-FROST_TIME = 300; # 300s = 5 min 
-CHECK_TIME = 20;
-
-fan_on = lambda: system('/home/pi/frozen/hub-ctrl -h 0 -P 2 -p 1');
-fan_off = lambda: system('/home/pi/frozen/hub-ctrl -h 0 -P 2 -p 0');
+from sense_hat import SenseHat
+from time import sleep
+from os import system
 
 #-------------------------------------------------------------------
 
-# main(none) : none
+SENSE = SenseHat()
+TEMPERATURE = 28 # 28°C / Temperature de declenchement
+FROST_TIME = 300 # 300s = 5 min 
+CHECK_TIME = 20 # 20s
+
+fan_on = lambda: system('~/frozen/hub-ctrl -h 0 -P 2 -p 1')
+fan_off = lambda: system('~/frozen/hub-ctrl -h 0 -P 2 -p 0')
+
+#-------------------------------------------------------------------
 
 def main(): 
-    while(True): 
-        if(SENSE.get_temperature() > TEMPERATURE):
-            fan_on();
-            sleep(FROST_TIME);
-        elif(SENSE.get_temperature() < TEMPERATURE):
-            fan_off();
-            sleep(CHECK_TIME);
+    while True : 
+        if SENSE.get_temperature() > TEMPERATURE :
+            fan_on()
+            sleep(FROST_TIME)
+        elif SENSE.get_temperature() < TEMPERATURE :
+            fan_off()
+            sleep(CHECK_TIME)
 
 #-------------------------------------------------------------------
 
-if(__name__ == '__main__'): 
-    main();
+if __name__ == '__main__' : 
+    main()
