@@ -14,11 +14,11 @@
 #   autre, 'hub-ctrl', dont les sources sont disponnibles ici :
 #   https://github.com/codazoda/hub-ctrl.c
 #   Une fois compile, il faut mettre le programme dans le dossier
-#   'frozen' de l'utilisateur qui lancera ce programme '~/frozen'
+#   'frozen' de l'utilisateur pi, qui lancera ce programme '/home/pi/frozen'
 #
 #   Le programme n'a pas de fonction d'arret. 
 #   Il doit etre execute de la façon suivante :
-#   user@machine:~/frozen $ sudo ./frozen_guardian.py &
+#   user@machine:/home/pi/frozen $ sudo ./frozen_guardian.py &
 #
 #   Schema :
 #    ________            __________________
@@ -51,8 +51,8 @@ TEMPERATURE = 28 # 28°C / Temperature de declenchement
 FROST_TIME = 300 # 300s = 5 min 
 CHECK_TIME = 20 # 20s
 
-fan_on = lambda: system('~/frozen/hub-ctrl -h 0 -P 2 -p 1')
-fan_off = lambda: system('~/frozen/hub-ctrl -h 0 -P 2 -p 0')
+fan_on = lambda: system('/home/pi/frozen/hub-ctrl -h 0 -P 2 -p 1')
+fan_off = lambda: system('/home/pi/frozen/hub-ctrl -h 0 -P 2 -p 0')
 
 #-------------------------------------------------------------------
 
